@@ -1,0 +1,102 @@
+openapi: 3.0.0
+info:
+  title: KeyClock API
+  version: 1.0.0
+  description: |
+    KeyClock Project
+servers:
+- url: http://localhost:8081
+  description: |
+    KeyClock Project
+paths:
+  /api/auth/login:
+    post:
+      summary: Login Admin
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        description: Request payload
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Admin'
+      responses:
+        '200':
+          description: Successful operation
+  /api/realms:
+    post:
+      summary: create new realm
+      requestBody:
+        description: Request payload
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/realm'
+      responses:
+        '200':
+          description: Successful operation
+  /api/realms/{realm_name}:
+    get:
+      summary: get realm by name
+      parameters:
+      - name: realm_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+    delete:
+      summary: Delete Realm
+      parameters:
+      - name: realm_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+components:
+  schemas:
+    Admin:
+      type: object
+      properties:
+        username:
+          type: string
+          description: ''
+          example: admin
+        password:
+          type: string
+          description: ''
+          example: admin
+      required:
+      - username
+      - password
+    realm:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ''
+          example: test
+        realm:
+          type: string
+          description: ''
+          example: test
+        enabled:
+          type: boolean
+          description: ''
+          example: 'true'
+      required:
+      - id
+      - realm
+      - enabled

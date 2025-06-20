@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: Yodha Project API
+  version: 1.0.0
+  description: This is army related project
+servers:
+- url: http://146.190.11.26:5056
+  description: This is army related project
+paths:
+  /register_user_beacon_transaction/v1.0:
+    post:
+      summary: create new beacon
+      requestBody:
+        description: Request payload
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User_Beacon'
+      responses:
+        '200':
+          description: Successful operation
+components:
+  schemas:
+    User_Beacon:
+      type: object
+      properties:
+        bec_unique_id:
+          type: string
+          description: ''
+          example: C0980001000100010000000100000007
+        sos_triggered_from:
+          type: integer
+          description: ''
+          example: '6'
+        status_id:
+          type: integer
+          description: ''
+          example: '1'
+        latitude:
+          type: string
+          description: ''
+          example: '562.56'
+      required:
+      - bec_unique_id
+      - sos_triggered_from
+      - status_id
+      - latitude
